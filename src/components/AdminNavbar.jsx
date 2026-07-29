@@ -22,7 +22,7 @@ export default function AdminNavbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-8">
-            <Link to="/admin/teams" className="flex items-center space-x-3">
+            <Link to="/admin/dashboard" className="flex items-center space-x-3">
               <div className="w-9 h-9 rounded-xl bg-red-600 flex items-center justify-center font-black text-white shadow-lg shadow-red-600/30">
                 ADM
               </div>
@@ -31,6 +31,16 @@ export default function AdminNavbar() {
               </span>
             </Link>
             <div className="flex items-center space-x-2">
+              <Link
+                to="/admin/dashboard"
+                className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
+                  location.pathname === '/admin/dashboard' || location.pathname === '/admin'
+                    ? 'bg-red-600 text-white shadow-lg shadow-red-600/20'
+                    : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+                }`}
+              >
+                Dashboard
+              </Link>
               <Link
                 to="/admin/teams"
                 className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${

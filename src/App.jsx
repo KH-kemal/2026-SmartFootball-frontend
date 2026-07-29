@@ -12,6 +12,7 @@ import LeagueTable from './pages/league-table/LeagueTable';
 import Leaderboard from './pages/leaderboard/Leaderboard';
 import Login from './pages/auth/Login';
 
+import AdminDashboard from './pages/admin/dashboard/AdminDashboard';
 import AdminTeams from './pages/admin/teams/AdminTeams';
 import TeamCreate from './pages/admin/teams/TeamCreate';
 import TeamEdit from './pages/admin/teams/TeamEdit';
@@ -41,10 +42,10 @@ export default function App() {
           <Route path="/leaderboard" element={<Leaderboard />} />
         </Route>
 
-
         <Route element={<ProtectedRoute />}>
           <Route path="/admin" element={<AdminLayout />}>
-            <Route index element={<Navigate to="teams" replace />} />
+            <Route index element={<Navigate to="dashboard" replace />} />
+            <Route path="dashboard" element={<AdminDashboard />} />
             <Route path="teams" element={<AdminTeams />} />
             <Route path="teams/create" element={<TeamCreate />} />
             <Route path="teams/:id/edit" element={<TeamEdit />} />

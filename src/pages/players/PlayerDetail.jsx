@@ -5,24 +5,36 @@ import api from '../../services/api';
 export default function PlayerDetail() {
   const { id } = useParams();
   const [player, setPlayer] = useState(null);
+  const [stats, setStats] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchPlayerDetail();
+    fetchPlayerAndStats();
   }, [id]);
 
-  const fetchPlayerDetail = async () => {
+  const fetchPlayerAndStats = async () => {
     try {
       setLoading(true);
-      const response = await api.get(`/players/${id}`);
-      setPlayer(response.data);
+      const [resPlayer, resStats] = await Promise.all([
+        api.get(`/players/${id}`),
+        api.get(`/player-stats?player_id=${id}`)
+      ]);
+      setPlayer(resPlayer.data);
+      setStats(resStats.data);
       setError(null);
     } catch (err) {
       setError('Gagal mengambil detail pemain.');
     } finally {
       setLoading(false);
     }
+  };
+
+  const formatDate = (dateString) => {
+    if (!dateString) return '-';
+    return new Date(dateString).toLocaleDateString('id-ID', {
+      day: 'numeric', month: 'short', year: 'numeric'
+    });
   };
 
   if (loading) {
@@ -97,7 +109,7 @@ export default function PlayerDetail() {
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-8">
           <div className="bg-slate-950/50 border border-slate-800 rounded-2xl p-5">
             <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">Tanggal Lahir</span>
-            <span className="text-lg font-bold text-white">{player.birth_date || '-'}</span>
+            <span className="text-lg font-bold text-white">{formatDate(player.birth_date)}</span>
           </div>
           <div className="bg-slate-950/50 border border-slate-800 rounded-2xl p-5">
             <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">Tinggi Badan</span>
@@ -108,6 +120,61 @@ export default function PlayerDetail() {
             <span className="text-lg font-bold text-white">{player.weight ? `${player.weight} kg` : '-'}</span>
           </div>
         </div>
+      </div>
+
+      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl">
+        <h2 className="text-xl font-extrabold text-white mb-6">Riwayat Performa & Statistik Pertandingan</h2>
+
+        {stats.length === 0 ? (
+          <div className="bg-slate-950/50 border border-slate-800/80 rounded-2xl p-8 text-center">
+            <p className="text-slate-400 text-sm">Belum ada catatan statistik pertandingan untuk pemain ini.</p>
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-sm text-slate-300">
+              <thead className="bg-slate-950/80 text-slate-400 uppercase text-xs font-extrabold tracking-wider border-b border-slate-800">
+                <tr>
+                  <th className="py-4 px-4">Tanggal</th>
+                  <th className="py-4 px-6">Pertandingan</th>
+                  <th className="py-4 px-4 text-center">Menit</th>
+                  <th className="py-4 px-4 text-center">Gol</th>
+                  <th className="py-4 px-4 text-center">Assist</th>
+                  <th className="py-4 px-4 text-center">Kartu (K/M)</th>
+                  <th className="py-4 px-6 text-right">Rating Match</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-800/60 font-medium">
+                {stats.map((stat) => (
+                  <tr key={stat.id} className="hover:bg-slate-800/30 transition-colors">
+                    <td className="py-4 px-4 text-slate-400 whitespace-nowrap">
+                      {formatDate(stat.fixture?.match_date)}
+                    </td>
+                    <td className="py-4 px-6 font-bold text-white">
+                      {stat.fixture ? (
+                        <span>
+                          {stat.fixture.home_team?.name} <span className="text-red-400 font-normal px-1">vs</span> {stat.fixture.away_team?.name}
+                        </span>
+                      ) : (
+                        <span className="text-slate-500">Laga #{stat.fixture_id}</span>
+                      )}
+                    </td>
+                    <td className="py-4 px-4 text-center text-slate-400">{stat.minutes_played}&apos;</td>
+                    <td className="py-4 px-4 text-center font-bold text-emerald-400">{stat.goals}</td>
+                    <td className="py-4 px-4 text-center font-bold text-blue-400">{stat.assists}</td>
+                    <td className="py-4 px-4 text-center">
+                      <span className="text-amber-400 font-bold">{stat.yellow_cards}</span>
+                      <span className="text-slate-600 mx-1">/</span>
+                      <span className="text-red-500 font-bold">{stat.red_cards}</span>
+                    </td>
+                    <td className="py-4 px-6 text-right font-black text-amber-400 text-base">
+                      {Number(stat.rating).toFixed(2)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   );
