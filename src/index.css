@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+@theme {
+  --color-primary: #8B5CF6;
+  --color-primary-hover: #7C3AED;
+  --color-primary-light: #C4B5FD;
+  --color-primary-tea: #EDE9FE;
+  --color-primary-snow: #FAF9FD;
+}
+
+@variant dark (&:where(.dark, .dark *));

@@ -3,6 +3,7 @@ import PublicLayout from './layouts/PublicLayout';
 import AdminLayout from './layouts/AdminLayout';
 import ProtectedRoute from './components/ProtectedRoute';
 
+import Home from './pages/home/Home';
 import TeamList from './pages/teams/TeamList';
 import TeamDetail from './pages/teams/TeamDetail';
 import PlayerList from './pages/players/PlayerList';
@@ -32,7 +33,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
 
         <Route element={<PublicLayout />}>
-          <Route path="/" element={<Navigate to="/teams" replace />} />
+          <Route path="/" element={<Home />} />
           <Route path="/teams" element={<TeamList />} />
           <Route path="/teams/:id" element={<TeamDetail />} />
           <Route path="/players" element={<PlayerList />} />

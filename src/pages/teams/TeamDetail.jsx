@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { Calendar, Users, Trophy, Shield, ArrowLeft } from 'lucide-react';
 import api from '../../services/api';
 
 export default function TeamDetail() {
@@ -47,19 +48,19 @@ export default function TeamDetail() {
 
   const getMatchBadge = (fixture) => {
     if (fixture.status !== 'completed') {
-      return { label: 'SCHEDULED', color: 'bg-amber-500/10 text-amber-400 border-amber-500/20' };
+      return { label: 'SCHEDULED', color: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20' };
     }
     const isHome = fixture.home_team_id === Number(id);
     const myScore = isHome ? fixture.home_score : fixture.away_score;
     const oppScore = isHome ? fixture.away_score : fixture.home_score;
 
     if (myScore > oppScore) {
-      return { label: 'WIN', color: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' };
+      return { label: 'WIN', color: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20' };
     }
     if (myScore < oppScore) {
-      return { label: 'LOSE', color: 'bg-red-500/10 text-red-400 border-red-500/20' };
+      return { label: 'LOSE', color: 'bg-red-500/10 text-red-600 dark:text-red-400 border-red-500/20' };
     }
-    return { label: 'DRAW', color: 'bg-slate-500/10 text-slate-300 border-slate-500/20' };
+    return { label: 'DRAW', color: 'bg-slate-500/10 text-slate-600 dark:text-slate-300 border-slate-500/20' };
   };
 
   const groupedSquad = {
@@ -71,8 +72,9 @@ export default function TeamDetail() {
 
   if (loading) {
     return (
-      <div className="text-center py-12">
-        <p className="text-slate-400 text-lg animate-pulse">Memuat portal klub...</p>
+      <div className="text-center py-20">
+        <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+        <p className="text-slate-500 dark:text-slate-400 text-sm font-semibold">Memuat portal klub...</p>
       </div>
     );
   }
@@ -80,57 +82,61 @@ export default function TeamDetail() {
   if (error || !team) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-12 text-center">
-        <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-6 text-red-400 mb-4">
+        <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-6 text-red-500 dark:text-red-400 mb-6 font-semibold">
           {error || 'Klub tidak ditemukan.'}
         </div>
-        <Link to="/teams" className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-sm font-semibold">
-          Kembali ke Daftar Tim
+        <Link to="/teams" className="inline-flex items-center gap-2 px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-sm font-bold shadow-md transition-colors">
+          <ArrowLeft size={16} /> Kembali ke Daftar Tim
         </Link>
       </div>
     );
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 transition-colors duration-300">
       <div className="mb-6">
-        <Link to="/teams" className="inline-flex items-center text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors">
-          ← Kembali ke Daftar Tim
+        <Link to="/teams" className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline transition-colors">
+          <ArrowLeft size={16} /> Kembali ke Daftar Tim
         </Link>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl mb-12">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-8 border-b border-slate-800">
-          <div className="flex items-center gap-6">
+      {/* Club Header Card */}
+      <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 rounded-3xl p-8 shadow-xs mb-12 transition-colors duration-300">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-8 border-b border-slate-100 dark:border-slate-800/80">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
             {team.logo ? (
-              <img src={team.logo} alt={team.name} className="w-24 h-24 rounded-2xl bg-slate-800 p-2 border border-slate-700 object-cover shadow-xl" />
+              <img src={team.logo} alt={team.name} className="w-24 h-24 rounded-2xl bg-slate-50 dark:bg-slate-800 p-2 border border-slate-200/60 dark:border-slate-700/60 object-cover shadow-sm shrink-0" />
             ) : (
-              <div className="w-24 h-24 rounded-2xl bg-blue-600/20 border border-blue-500/30 text-blue-400 flex items-center justify-center font-black text-3xl shadow-xl">
+              <div className="w-24 h-24 rounded-2xl bg-primary/10 border border-primary/20 text-primary flex items-center justify-center font-black text-3xl shadow-xs shrink-0">
                 {team.name.substring(0, 2).toUpperCase()}
               </div>
             )}
             <div>
-              <span className="px-3 py-1 bg-blue-500/10 border border-blue-500/20 text-blue-400 font-semibold rounded-lg text-xs uppercase tracking-wider">
+              <span className="inline-block px-3 py-1 bg-primary/10 border border-primary/20 text-primary font-bold rounded-lg text-xs uppercase tracking-wider">
                 Est. {team.founded_year || 'N/A'}
               </span>
-              <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight mt-2">{team.name}</h1>
-              <p className="text-slate-400 text-sm mt-1 max-w-2xl">{team.description || 'Tidak ada deskripsi klub.'}</p>
+              <h1 className="text-3xl sm:text-4xl font-black text-slate-800 dark:text-white tracking-tight mt-2">{team.name}</h1>
+              <p className="text-slate-500 dark:text-slate-400 text-sm mt-2 max-w-2xl leading-relaxed">{team.description || 'Tidak ada deskripsi klub.'}</p>
             </div>
           </div>
 
-          <div className="bg-slate-950/60 border border-slate-800/80 rounded-2xl px-6 py-4 flex flex-col items-end min-w-[160px]">
+          <div className="bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/80 rounded-2xl px-6 py-4 flex flex-col items-end min-w-[160px] self-stretch md:self-auto transition-colors duration-300">
             <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Total Skuad</span>
             <div className="flex items-baseline gap-1 mt-1">
-              <span className="text-4xl font-black text-blue-400">{squad.length}</span>
+              <span className="text-4xl font-black text-primary">{squad.length}</span>
               <span className="text-sm font-bold text-slate-500">Pemain</span>
             </div>
           </div>
         </div>
       </div>
 
+      {/* Squad / Roster section */}
       <div className="mb-12">
-        <h2 className="text-2xl font-extrabold text-white mb-6">Skuad Pemain (Roster)</h2>
+        <h2 className="text-2xl font-black text-slate-800 dark:text-white mb-6 flex items-center gap-2">
+          <Users className="text-primary" /> Skuad Pemain (Roster)
+        </h2>
         {squad.length === 0 ? (
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 text-center text-slate-400">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 text-center text-slate-500 dark:text-slate-400 transition-colors duration-300">
             Belum ada pemain yang terdaftar di klub ini.
           </div>
         ) : (
@@ -138,7 +144,7 @@ export default function TeamDetail() {
             {Object.entries(groupedSquad).map(([position, players]) => (
               players.length > 0 && (
                 <div key={position}>
-                  <h3 className="text-sm font-black uppercase tracking-wider text-slate-400 mb-4 border-l-4 border-blue-500 pl-3">
+                  <h3 className="text-sm font-black uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-4 border-l-4 border-primary pl-3">
                     {position}s ({players.length})
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -146,22 +152,22 @@ export default function TeamDetail() {
                       <Link
                         key={player.id}
                         to={`/players/${player.id}`}
-                        className="bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-2xl p-4 flex items-center space-x-4 transition-all hover:shadow-lg group"
+                        className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 hover:border-primary/50 hover:shadow-md hover:shadow-primary/5 rounded-2xl p-4 flex items-center space-x-4 transition-all group"
                       >
                         {player.photo ? (
-                          <img src={player.photo} alt={player.name} className="w-14 h-14 rounded-xl bg-slate-800 object-cover" />
+                          <img src={player.photo} alt={player.name} className="w-14 h-14 rounded-xl bg-slate-50 dark:bg-slate-800 object-cover shrink-0" />
                         ) : (
-                          <div className="w-14 h-14 rounded-xl bg-slate-800 text-slate-400 flex items-center justify-center font-black text-lg group-hover:bg-blue-600/20 group-hover:text-blue-400 transition-colors">
+                          <div className="w-14 h-14 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 flex items-center justify-center font-black text-lg group-hover:bg-primary/20 group-hover:text-primary transition-colors shrink-0">
                             #{player.jersey_number}
                           </div>
                         )}
                         <div className="flex-1 min-w-0">
-                          <span className="text-xs font-bold text-amber-400">#{player.jersey_number}</span>
-                          <h4 className="font-bold text-white text-base truncate group-hover:text-blue-400 transition-colors">
+                          <span className="text-xs font-bold text-amber-500">#{player.jersey_number}</span>
+                          <h4 className="font-bold text-slate-800 dark:text-white text-base truncate group-hover:text-primary transition-colors">
                             {player.name}
                           </h4>
-                          <span className="text-xs text-slate-400 font-medium block mt-0.5">
-                            Rating: <strong className="text-emerald-400">{Number(player.overall_rating).toFixed(2)}</strong>
+                          <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold block mt-0.5">
+                            Rating: <strong className="text-primary font-black">{Number(player.overall_rating).toFixed(2)}</strong>
                           </span>
                         </div>
                       </Link>
@@ -174,54 +180,59 @@ export default function TeamDetail() {
         )}
       </div>
 
+      {/* Fixtures section */}
       <div>
-        <h2 className="text-2xl font-extrabold text-white mb-6">Riwayat & Jadwal Pertandingan Klub</h2>
+        <h2 className="text-2xl font-black text-slate-800 dark:text-white mb-6 flex items-center gap-2">
+          <Calendar className="text-primary" /> Riwayat & Jadwal Pertandingan Klub
+        </h2>
         {fixtures.length === 0 ? (
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 text-center text-slate-400">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 text-center text-slate-500 dark:text-slate-400 transition-colors duration-300">
             Belum ada jadwal pertandingan untuk klub ini.
           </div>
         ) : (
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-xl">
-            <table className="w-full text-left text-sm text-slate-300">
-              <thead className="bg-slate-950/80 text-slate-400 uppercase text-xs font-extrabold tracking-wider border-b border-slate-800">
-                <tr>
-                  <th className="py-4 px-6">Waktu & Venue</th>
-                  <th className="py-4 px-6 text-center">Pertandingan</th>
-                  <th className="py-4 px-6 text-center">Skor</th>
-                  <th className="py-4 px-6 text-right">Hasil</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-800/60 font-medium">
-                {fixtures.map((fixture) => {
-                  const badge = getMatchBadge(fixture);
-                  return (
-                    <tr key={fixture.id} className="hover:bg-slate-800/30 transition-colors">
-                      <td className="py-4 px-6">
-                        <p className="font-bold text-white">{formatDate(fixture.match_date)}</p>
-                        <p className="text-xs text-slate-500 mt-0.5">{fixture.venue || 'Stadion Utama'}</p>
-                      </td>
-                      <td className="py-4 px-6 text-center font-bold text-white">
-                        <span className={fixture.home_team_id === Number(id) ? 'text-blue-400 font-extrabold' : ''}>
-                          {fixture.home_team?.name}
-                        </span>
-                        <span className="text-red-400 font-normal px-2">vs</span>
-                        <span className={fixture.away_team_id === Number(id) ? 'text-blue-400 font-extrabold' : ''}>
-                          {fixture.away_team?.name}
-                        </span>
-                      </td>
-                      <td className="py-4 px-6 text-center font-black text-amber-400 text-lg">
-                        {fixture.status === 'completed' ? `${fixture.home_score} : ${fixture.away_score}` : '- : -'}
-                      </td>
-                      <td className="py-4 px-6 text-right">
-                        <span className={`px-3 py-1 rounded-lg text-xs font-black border uppercase tracking-wider inline-block ${badge.color}`}>
-                          {badge.label}
-                        </span>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+          <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 rounded-3xl overflow-hidden shadow-xs transition-colors duration-300">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-sm text-slate-600 dark:text-slate-300">
+                <thead className="bg-slate-50 dark:bg-slate-950/80 text-slate-500 dark:text-slate-400 uppercase text-xs font-extrabold tracking-wider border-b border-slate-200 dark:border-slate-850">
+                  <tr>
+                    <th className="py-4 px-6">Waktu & Venue</th>
+                    <th className="py-4 px-6 text-center">Pertandingan</th>
+                    <th className="py-4 px-6 text-center">Skor</th>
+                    <th className="py-4 px-6 text-right">Hasil</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60 font-semibold">
+                  {fixtures.map((fixture) => {
+                    const badge = getMatchBadge(fixture);
+                    return (
+                      <tr key={fixture.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+                        <td className="py-4 px-6">
+                          <p className="font-bold text-slate-800 dark:text-white">{formatDate(fixture.match_date)}</p>
+                          <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">{fixture.venue || 'Stadion Utama'}</p>
+                        </td>
+                        <td className="py-4 px-6 text-center font-bold text-slate-800 dark:text-white">
+                          <span className={fixture.home_team_id === Number(id) ? 'text-primary font-extrabold' : ''}>
+                            {fixture.home_team?.name}
+                          </span>
+                          <span className="text-slate-400 font-normal px-3.5">vs</span>
+                          <span className={fixture.away_team_id === Number(id) ? 'text-primary font-extrabold' : ''}>
+                            {fixture.away_team?.name}
+                          </span>
+                        </td>
+                        <td className="py-4 px-6 text-center font-black text-amber-500 text-lg">
+                          {fixture.status === 'completed' ? `${fixture.home_score} : ${fixture.away_score}` : '- : -'}
+                        </td>
+                        <td className="py-4 px-6 text-right">
+                          <span className={`px-3 py-1 rounded-xl text-xs font-bold border uppercase tracking-wider inline-block ${badge.color}`}>
+                            {badge.label}
+                          </span>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
       </div>
