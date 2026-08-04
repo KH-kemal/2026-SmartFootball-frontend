@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 export default function PublicLayout() {
   const [theme, setTheme] = useState(() => {
@@ -25,13 +26,11 @@ export default function PublicLayout() {
     <div className="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen font-sans antialiased flex flex-col justify-between transition-colors duration-300">
       <div>
         <Navbar theme={theme} toggleTheme={toggleTheme} />
-        <main className="py-8">
+        <main>
           <Outlet />
         </main>
       </div>
-      <footer className="border-t border-slate-200 dark:border-slate-900 bg-white dark:bg-slate-950 py-8 text-center text-xs text-slate-400 dark:text-slate-600 transition-colors duration-300">
-        &copy; {new Date().getFullYear()} SmartFootball. All rights reserved.
-      </footer>
+      <Footer />
     </div>
   );
 }

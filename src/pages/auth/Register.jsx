@@ -3,9 +3,9 @@ import { useNavigate, Link } from 'react-router-dom';
 import { ShieldAlert, ArrowLeft, X } from 'lucide-react';
 import api from '../../services/api';
 
-export default function Login() {
+export default function Register() {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ email: '', password: '' });
+  const [form, setForm] = useState({ name: '', email: '', password: '', password_confirmation: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -25,25 +25,30 @@ export default function Login() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleAuthRedirect = (user) => {
-    if (user.email === 'admin@smartfootball.com') {
-      navigate('/admin/dashboard');
-    } else {
-      navigate('/');
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+
+    if (!form.email.toLowerCase().endsWith('@gmail.com')) {
+      setError('Pendaftaran hanya diperbolehkan menggunakan email Gmail (@gmail.com).');
+      setLoading(false);
+      return;
+    }
+
+    if (form.password !== form.password_confirmation) {
+      setError('Konfirmasi kata sandi tidak cocok.');
+      setLoading(false);
+      return;
+    }
+
     try {
-      const response = await api.post('/login', form);
+      const response = await api.post('/register', form);
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
-      handleAuthRedirect(response.data.user);
+      navigate('/');
     } catch (err) {
-      setError(err.response?.data?.message || 'Gagal masuk. Periksa kembali email dan kata sandi.');
+      setError(err.response?.data?.message || 'Gagal mendaftar. Silakan coba lagi.');
     } finally {
       setLoading(false);
     }
@@ -64,9 +69,9 @@ export default function Login() {
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
       setShowGoogleModal(false);
-      handleAuthRedirect(response.data.user);
+      navigate('/');
     } catch (err) {
-      setGoogleError(err.response?.data?.message || 'Gagal masuk menggunakan Google.');
+      setGoogleError(err.response?.data?.message || 'Gagal autentikasi Google.');
     } finally {
       setLoading(false);
     }
@@ -90,10 +95,10 @@ export default function Login() {
           </Link>
         </div>
         <h2 className="mt-6 text-center text-3xl font-black text-slate-800 dark:text-white tracking-tight">
-          Selamat Datang Kembali
+          Buat Akun Baru
         </h2>
         <p className="mt-2 text-center text-sm text-slate-500 dark:text-slate-400 font-medium">
-          Masuk ke akun SmartFootball Anda
+          Daftar SmartFootball menggunakan akun Gmail Anda
         </p>
       </div>
 
@@ -107,10 +112,25 @@ export default function Login() {
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">
-                Alamat Email
+                Nama Lengkap
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                required
+                placeholder="Budi Santoso"
+                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800/80 rounded-xl px-4 py-3 text-slate-800 dark:text-white placeholder-slate-450 dark:placeholder-slate-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-300 font-medium"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">
+                Email Gmail
               </label>
               <input
                 type="email"
@@ -118,8 +138,8 @@ export default function Login() {
                 value={form.email}
                 onChange={handleChange}
                 required
-                placeholder="nama@gmail.com atau admin@smartfootball.com"
-                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800/80 rounded-xl px-4 py-3 text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-300 font-medium"
+                placeholder="nama@gmail.com"
+                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800/80 rounded-xl px-4 py-3 text-slate-800 dark:text-white placeholder-slate-450 dark:placeholder-slate-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-300 font-medium"
               />
             </div>
 
@@ -134,7 +154,22 @@ export default function Login() {
                 onChange={handleChange}
                 required
                 placeholder="••••••••"
-                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800/80 rounded-xl px-4 py-3 text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-300 font-medium"
+                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800/80 rounded-xl px-4 py-3 text-slate-800 dark:text-white placeholder-slate-450 dark:placeholder-slate-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-300 font-medium"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">
+                Konfirmasi Kata Sandi
+              </label>
+              <input
+                type="password"
+                name="password_confirmation"
+                value={form.password_confirmation}
+                onChange={handleChange}
+                required
+                placeholder="••••••••"
+                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800/80 rounded-xl px-4 py-3 text-slate-800 dark:text-white placeholder-slate-450 dark:placeholder-slate-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-300 font-medium"
               />
             </div>
 
@@ -144,7 +179,7 @@ export default function Login() {
                 disabled={loading}
                 className="w-full flex justify-center py-3.5 px-4 border border-transparent rounded-xl shadow-lg shadow-primary/20 text-sm font-bold text-white bg-primary hover:bg-primary-hover focus:outline-none hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 duration-300 cursor-pointer"
               >
-                {loading ? 'Masuk...' : 'Masuk Sekarang'}
+                {loading ? 'Mendaftarkan...' : 'Daftar Sekarang'}
               </button>
             </div>
           </form>
@@ -156,7 +191,7 @@ export default function Login() {
             </div>
             <div className="relative flex justify-center text-xs font-bold uppercase tracking-wider">
               <span className="bg-white dark:bg-slate-900 px-3 text-slate-500 dark:text-slate-400">
-                Atau masuk dengan
+                Atau daftar dengan
               </span>
             </div>
           </div>
@@ -185,7 +220,7 @@ export default function Login() {
                   d="M12 23c3.24 0 5.97-1.07 7.96-2.91l-3.9-2.96c-1.08.72-2.47 1.16-4.06 1.16-3.24 0-6-2.38-6.94-5.64L1.24 15.6C3.2 19.58 7.24 23 12 23z"
                 />
               </svg>
-              <span>Masuk menggunakan Google</span>
+              <span>Daftar menggunakan Google</span>
             </button>
           </div>
 
@@ -195,9 +230,9 @@ export default function Login() {
               <span>Kembali</span>
             </Link>
             <p className="text-xs text-slate-500 dark:text-slate-400 font-bold">
-              Belum punya akun?{' '}
-              <Link to="/register" className="text-primary hover:text-primary-hover hover:underline transition-all">
-                Daftar
+              Sudah punya akun?{' '}
+              <Link to="/login" className="text-primary hover:text-primary-hover hover:underline transition-all">
+                Masuk
               </Link>
             </p>
           </div>

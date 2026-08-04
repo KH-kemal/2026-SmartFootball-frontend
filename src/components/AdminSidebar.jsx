@@ -55,9 +55,11 @@ export default function AdminSidebar({ theme, toggleTheme }) {
         {/* Brand */}
         <div className={`p-6 flex items-center justify-between border-b border-slate-100 dark:border-slate-800/80 ${isCollapsed ? 'justify-center' : ''}`}>
           <Link to="/admin/dashboard" className="flex items-center space-x-3 group">
-            <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center font-black text-white shadow-lg shadow-primary/30 shrink-0">
-              SF
-            </div>
+            <img 
+              src="/logo.png" 
+              alt="SmartFootball Logo" 
+              className="w-9 h-9 object-contain shrink-0 transition-transform duration-300 group-hover:scale-105" 
+            />
             {!isCollapsed && (
               <span className="font-extrabold text-base tracking-tight text-slate-800 dark:text-white">
                 Smart<span className="text-primary">Admin</span>

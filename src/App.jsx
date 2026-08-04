@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import PublicLayout from './layouts/PublicLayout';
 import AdminLayout from './layouts/AdminLayout';
 import ProtectedRoute from './components/ProtectedRoute';
+import MemberRoute from './components/MemberRoute';
 
 import Home from './pages/home/Home';
 import TeamList from './pages/teams/TeamList';
@@ -12,6 +13,7 @@ import FixtureList from './pages/fixtures/FixtureList';
 import LeagueTable from './pages/league-table/LeagueTable';
 import Leaderboard from './pages/leaderboard/Leaderboard';
 import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
 
 import AdminDashboard from './pages/admin/dashboard/AdminDashboard';
 import AdminTeams from './pages/admin/teams/AdminTeams';
@@ -31,16 +33,20 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/teams" element={<TeamList />} />
-          <Route path="/teams/:id" element={<TeamDetail />} />
-          <Route path="/players" element={<PlayerList />} />
-          <Route path="/players/:id" element={<PlayerDetail />} />
-          <Route path="/fixtures" element={<FixtureList />} />
-          <Route path="/league-table" element={<LeagueTable />} />
-          <Route path="/leaderboard" element={<Leaderboard />} />
+          
+          <Route element={<MemberRoute />}>
+            <Route path="/teams" element={<TeamList />} />
+            <Route path="/teams/:id" element={<TeamDetail />} />
+            <Route path="/players" element={<PlayerList />} />
+            <Route path="/players/:id" element={<PlayerDetail />} />
+            <Route path="/fixtures" element={<FixtureList />} />
+            <Route path="/league-table" element={<LeagueTable />} />
+            <Route path="/leaderboard" element={<Leaderboard />} />
+          </Route>
         </Route>
 
         <Route element={<ProtectedRoute />}>
