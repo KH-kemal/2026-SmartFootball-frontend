@@ -10,11 +10,8 @@ export default function PlayerDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchPlayerAndStats();
-  }, [id]);
 
-  const fetchPlayerAndStats = async () => {
+  async function fetchPlayerAndStats() {
     try {
       setLoading(true);
       const [resPlayer, resStats] = await Promise.all([
@@ -29,7 +26,11 @@ export default function PlayerDetail() {
     } finally {
       setLoading(false);
     }
-  };
+  }
+
+  useEffect(() => {
+    fetchPlayerAndStats();
+  }, [id]);
 
   const formatDate = (dateString) => {
     if (!dateString) return '-';

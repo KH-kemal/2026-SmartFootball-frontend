@@ -23,13 +23,11 @@ export default function PublicLayout() {
   };
 
   return (
-    <div className="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen font-sans antialiased flex flex-col justify-between transition-colors duration-300">
-      <div>
-        <Navbar theme={theme} toggleTheme={toggleTheme} />
-        <main>
-          <Outlet />
-        </main>
-      </div>
+    <div className="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-dvh font-sans antialiased flex flex-col transition-colors duration-300">
+      <Navbar theme={theme} toggleTheme={toggleTheme} />
+      <main className="flex-1">
+        <Outlet />
+      </main>
       <Footer />
     </div>
   );

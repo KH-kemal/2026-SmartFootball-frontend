@@ -7,11 +7,8 @@ export default function AdminPlayerStats() {
   const [stats, setStats] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchStats();
-  }, []);
 
-  const fetchStats = async () => {
+  async function fetchStats() {
     try {
       setLoading(true);
       const response = await api.get('/player-stats');
@@ -21,7 +18,11 @@ export default function AdminPlayerStats() {
     } finally {
       setLoading(false);
     }
-  };
+  }
+
+  useEffect(() => {
+    fetchStats();
+  }, []);
 
   const handleDelete = async (id, playerName) => {
     if (window.confirm(`Yakin ingin menghapus statistik pertandingan untuk pemain "${playerName}"? Rating keseluruhan pemain akan dihitung ulang.`)) {

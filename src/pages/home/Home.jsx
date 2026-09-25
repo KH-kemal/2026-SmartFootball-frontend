@@ -16,12 +16,8 @@ export default function Home() {
     return savedUser ? JSON.parse(savedUser) : null;
   });
 
-  useEffect(() => {
-    document.title = 'SmartFootball | Portal Analisis & Statistik Sepak Bola';
-    fetchHomeData();
-  }, []);
 
-  const fetchHomeData = async () => {
+  async function fetchHomeData() {
     try {
       setLoading(true);
       const [fixturesRes, standingsRes, leaderboardRes] = await Promise.all([
@@ -43,7 +39,12 @@ export default function Home() {
     } finally {
       setLoading(false);
     }
-  };
+  }
+
+  useEffect(() => {
+    document.title = 'SmartFootball | Portal Analisis & Statistik Sepak Bola';
+    fetchHomeData();
+  }, []);
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('id-ID', {

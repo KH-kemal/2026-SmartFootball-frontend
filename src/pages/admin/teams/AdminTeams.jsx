@@ -7,11 +7,8 @@ export default function AdminTeams() {
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchTeams();
-  }, []);
 
-  const fetchTeams = async () => {
+  async function fetchTeams() {
     try {
       setLoading(true);
       const response = await api.get('/teams');
@@ -21,7 +18,11 @@ export default function AdminTeams() {
     } finally {
       setLoading(false);
     }
-  };
+  }
+
+  useEffect(() => {
+    fetchTeams();
+  }, []);
 
   const handleDelete = async (id, name) => {
     if (window.confirm(`Yakin ingin menghapus klub "${name}"? Semua data pemain di dalamnya akan ikut terhapus.`)) {

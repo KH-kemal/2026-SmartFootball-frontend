@@ -1,17 +1,25 @@
+import { useEffect, useState } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
+import api from '../services/api';
 
 export default function ProtectedRoute() {
   const token = localStorage.getItem('token');
-  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  const [state, setState] = useState({ checking: Boolean(token), allowed: false });
 
-  if (!token) {
-    return <Navigate to="/login" replace />;
-  }
+  useEffect(() => {
+    if (!token) return;
+    let active = true;
+    api.get('/me').then(({ data }) => {
+      if (!active) return;
+      localStorage.setItem('user', JSON.stringify(data));
+      setState({ checking: false, allowed: Boolean(data.is_admin) });
+    }).catch(() => {
+      if (active) setState({ checking: false, allowed: false });
+    });
+    return () => { active = false; };
+  }, [token]);
 
-  // Only allow admin@smartfootball.com to access admin pages
-  if (user.email !== 'admin@smartfootball.com') {
-    return <Navigate to="/" replace />;
-  }
-
-  return <Outlet />;
+  if (!token) return <Navigate to="/login" replace />;
+  if (state.checking) return <div className="min-h-screen grid place-items-center text-slate-500">Memeriksa akses admin...</div>;
+  return state.allowed ? <Outlet /> : <Navigate to="/" replace />;
 }

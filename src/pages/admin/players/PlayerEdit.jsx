@@ -21,11 +21,8 @@ export default function PlayerEdit() {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchInitialData();
-  }, [id]);
 
-  const fetchInitialData = async () => {
+  async function fetchInitialData() {
     try {
       setLoading(true);
       const [resPlayer, resTeams] = await Promise.all([
@@ -49,7 +46,11 @@ export default function PlayerEdit() {
     } finally {
       setLoading(false);
     }
-  };
+  }
+
+  useEffect(() => {
+    fetchInitialData();
+  }, [id]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });

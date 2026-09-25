@@ -17,12 +17,8 @@ export default function TeamEdit() {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchTeam();
-    document.title = 'Edit Tim | SmartFootball';
-  }, [id]);
 
-  const fetchTeam = async () => {
+  async function fetchTeam() {
     try {
       setLoading(true);
       const response = await api.get(`/teams/${id}`);
@@ -38,7 +34,12 @@ export default function TeamEdit() {
     } finally {
       setLoading(false);
     }
-  };
+  }
+
+  useEffect(() => {
+    fetchTeam();
+    document.title = 'Edit Tim | SmartFootball';
+  }, [id]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });

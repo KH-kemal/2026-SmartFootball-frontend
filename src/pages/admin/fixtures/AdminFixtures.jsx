@@ -7,11 +7,8 @@ export default function AdminFixtures() {
   const [fixtures, setFixtures] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchFixtures();
-  }, []);
 
-  const fetchFixtures = async () => {
+  async function fetchFixtures() {
     try {
       setLoading(true);
       const response = await api.get('/fixtures');
@@ -21,7 +18,11 @@ export default function AdminFixtures() {
     } finally {
       setLoading(false);
     }
-  };
+  }
+
+  useEffect(() => {
+    fetchFixtures();
+  }, []);
 
   const handleDelete = async (id) => {
     if (window.confirm('Yakin ingin menghapus jadwal pertandingan ini?')) {

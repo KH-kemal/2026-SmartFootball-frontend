@@ -15,11 +15,8 @@ export default function FixtureCreate() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchTeams();
-  }, []);
 
-  const fetchTeams = async () => {
+  async function fetchTeams() {
     try {
       const response = await api.get('/teams');
       setTeams(response.data);
@@ -29,7 +26,11 @@ export default function FixtureCreate() {
     } catch (err) {
       console.error('Gagal memuat tim');
     }
-  };
+  }
+
+  useEffect(() => {
+    fetchTeams();
+  }, []);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });

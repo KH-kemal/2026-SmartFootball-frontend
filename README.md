@@ -1,38 +1,29 @@
-# KickRank Frontend
+# SmartFootball Frontend
 
-Frontend web publik dan admin untuk project KickRank, dibangun dengan React + Vite.
+React 19 + Vite untuk halaman publik dan portal admin SmartFootball. Seluruh data kompetisi diambil dari Laravel API; tidak ada akun Google simulasi atau data kompetisi bawaan.
 
-## Fitur Utama
-
-- Halaman publik daftar tim, pemain, jadwal, klasemen liga, dan leaderboard.
-- Halaman detail tim dan pemain.
-- Area admin untuk kelola tim, pemain, fixture, dan statistik pemain.
-- Routing terpisah antara halaman publik dan admin.
-- Konsumsi data dari backend Laravel melalui API.
-
-## Teknologi
-
-- React 19
-- Vite
-- React Router
-- Axios
-- Tailwind CSS
-
-## Menjalankan Project
+## Menjalankan
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Struktur Singkat
+Buat `.env` jika alamat API berbeda dari `http://127.0.0.1:8000/api`:
 
-- `src/pages/teams` untuk halaman publik tim.
-- `src/pages/players` untuk halaman publik pemain.
-- `src/pages/fixtures` untuk jadwal dan hasil pertandingan.
-- `src/pages/league-table` untuk klasemen liga.
-- `src/pages/admin` untuk halaman pengelolaan data.
+```env
+VITE_API_BASE_URL=http://127.0.0.1:8000/api
+```
 
-## Catatan
+## Halaman
 
-File seperti `node_modules`, hasil build, dan file environment tidak perlu di-push ke GitHub karena sudah diabaikan melalui `.gitignore`.
+Pengunjung dapat membuka `/`, `/teams`, `/players`, `/fixtures`, `/league-table`, dan `/leaderboard` tanpa login. Detail tim dan pemain juga publik. `/login` dan `/register` menyediakan autentikasi. `/admin/*` memerlukan akun dengan `is_admin=true`; akses diperiksa ulang melalui `/api/me`, dan backend juga melindungi endpoint admin.
+
+## Pemeriksaan
+
+```bash
+npm run build
+npm run lint
+```
+
+Build berhasil pada pemeriksaan terakhir. Lint masih memiliki temuan dari pola `useEffect` dan variabel yang belum dipakai pada sejumlah halaman.

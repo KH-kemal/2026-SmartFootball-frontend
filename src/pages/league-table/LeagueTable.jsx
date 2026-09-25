@@ -8,11 +8,8 @@ export default function LeagueTable() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchLeagueTable();
-  }, []);
 
-  const fetchLeagueTable = async () => {
+  async function fetchLeagueTable() {
     try {
       setLoading(true);
       const response = await api.get('/league-table');
@@ -23,7 +20,11 @@ export default function LeagueTable() {
     } finally {
       setLoading(false);
     }
-  };
+  }
+
+  useEffect(() => {
+    fetchLeagueTable();
+  }, []);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 transition-colors duration-300">

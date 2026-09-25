@@ -19,11 +19,8 @@ export default function PlayerCreate() {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchTeams();
-  }, []);
 
-  const fetchTeams = async () => {
+  async function fetchTeams() {
     try {
       const response = await api.get('/teams');
       setTeams(response.data);
@@ -33,7 +30,11 @@ export default function PlayerCreate() {
     } catch (err) {
       console.error('Gagal memuat tim');
     }
-  };
+  }
+
+  useEffect(() => {
+    fetchTeams();
+  }, []);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });

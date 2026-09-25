@@ -8,11 +8,8 @@ export default function TeamList() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchTeams();
-  }, []);
 
-  const fetchTeams = async () => {
+  async function fetchTeams() {
     try {
       setLoading(true);
       const response = await api.get('/teams');
@@ -23,7 +20,11 @@ export default function TeamList() {
     } finally {
       setLoading(false);
     }
-  };
+  }
+
+  useEffect(() => {
+    fetchTeams();
+  }, []);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

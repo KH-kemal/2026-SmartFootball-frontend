@@ -11,11 +11,8 @@ export default function TeamDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchTeamData();
-  }, [id]);
 
-  const fetchTeamData = async () => {
+  async function fetchTeamData() {
     try {
       setLoading(true);
       const [resTeam, resPlayers, resFixtures] = await Promise.all([
@@ -37,7 +34,11 @@ export default function TeamDetail() {
     } finally {
       setLoading(false);
     }
-  };
+  }
+
+  useEffect(() => {
+    fetchTeamData();
+  }, [id]);
 
   const formatDate = (dateString) => {
     if (!dateString) return '-';

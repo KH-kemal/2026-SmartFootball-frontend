@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import PublicLayout from './layouts/PublicLayout';
 import AdminLayout from './layouts/AdminLayout';
 import ProtectedRoute from './components/ProtectedRoute';
-import MemberRoute from './components/MemberRoute';
+
 
 import Home from './pages/home/Home';
 import TeamList from './pages/teams/TeamList';
@@ -27,6 +27,7 @@ import FixtureCreate from './pages/admin/fixtures/FixtureCreate';
 import FixtureEdit from './pages/admin/fixtures/FixtureEdit';
 import AdminPlayerStats from './pages/admin/player-stats/AdminPlayerStats';
 import PlayerStatCreate from './pages/admin/player-stats/PlayerStatCreate';
+import AdminScreening from './pages/admin/screening/AdminScreening';
 
 export default function App() {
   return (
@@ -38,7 +39,7 @@ export default function App() {
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
           
-          <Route element={<MemberRoute />}>
+
             <Route path="/teams" element={<TeamList />} />
             <Route path="/teams/:id" element={<TeamDetail />} />
             <Route path="/players" element={<PlayerList />} />
@@ -46,7 +47,6 @@ export default function App() {
             <Route path="/fixtures" element={<FixtureList />} />
             <Route path="/league-table" element={<LeagueTable />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
-          </Route>
         </Route>
 
         <Route element={<ProtectedRoute />}>
@@ -59,6 +59,7 @@ export default function App() {
             <Route path="players" element={<AdminPlayers />} />
             <Route path="players/create" element={<PlayerCreate />} />
             <Route path="players/:id/edit" element={<PlayerEdit />} />
+            <Route path="screening" element={<AdminScreening />} />
             <Route path="fixtures" element={<AdminFixtures />} />
             <Route path="fixtures/create" element={<FixtureCreate />} />
             <Route path="fixtures/:id/edit" element={<FixtureEdit />} />
@@ -66,6 +67,7 @@ export default function App() {
             <Route path="player-stats/create" element={<PlayerStatCreate />} />
           </Route>
         </Route>
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
   );

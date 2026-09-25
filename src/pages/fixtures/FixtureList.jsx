@@ -7,11 +7,8 @@ export default function FixtureList() {
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState('');
 
-  useEffect(() => {
-    fetchFixtures();
-  }, [statusFilter]);
 
-  const fetchFixtures = async () => {
+  async function fetchFixtures() {
     try {
       setLoading(true);
       const params = {};
@@ -23,7 +20,11 @@ export default function FixtureList() {
     } finally {
       setLoading(false);
     }
-  };
+  }
+
+  useEffect(() => {
+    fetchFixtures();
+  }, [statusFilter]);
 
   const formatDate = (dateString) => {
     const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };

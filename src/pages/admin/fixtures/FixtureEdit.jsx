@@ -14,11 +14,8 @@ export default function FixtureEdit() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchFixture();
-  }, [id]);
 
-  const fetchFixture = async () => {
+  async function fetchFixture() {
     try {
       setLoading(true);
       const response = await api.get(`/fixtures/${id}`);
@@ -33,7 +30,11 @@ export default function FixtureEdit() {
     } finally {
       setLoading(false);
     }
-  };
+  }
+
+  useEffect(() => {
+    fetchFixture();
+  }, [id]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });

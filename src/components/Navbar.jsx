@@ -40,7 +40,7 @@ export default function Navbar({ theme, toggleTheme }) {
     { name: 'Leaderboard', href: '/leaderboard' },
   ];
 
-  const visibleNavigation = user ? navigation : [];
+  const visibleNavigation = navigation;
 
   const isActive = (href) => {
     if (href === '/') {
@@ -160,7 +160,7 @@ export default function Navbar({ theme, toggleTheme }) {
                       <div className="border-t border-slate-100 dark:border-slate-800/80 my-2"></div>
 
                       {/* Admin panel option */}
-                      {user.email === 'admin@smartfootball.com' && (
+                      {user.is_admin && (
                         <Link
                           to="/admin"
                           onClick={() => setProfileMenuOpen(false)}
@@ -250,7 +250,7 @@ export default function Navbar({ theme, toggleTheme }) {
                     </p>
                   </div>
 
-                  {user.email === 'admin@smartfootball.com' && (
+                  {user.is_admin && (
                     <Link
                       to="/admin"
                       onClick={() => setMobileMenuOpen(false)}

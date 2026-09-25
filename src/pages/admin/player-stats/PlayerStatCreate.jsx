@@ -28,11 +28,8 @@ export default function PlayerStatCreate() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchInitialData();
-  }, []);
 
-  const fetchInitialData = async () => {
+  async function fetchInitialData() {
     try {
       const [resFixtures, resPlayers] = await Promise.all([
         api.get('/fixtures'),
@@ -51,7 +48,11 @@ export default function PlayerStatCreate() {
     } catch (err) {
       console.error('Gagal memuat data awal');
     }
-  };
+  }
+
+  useEffect(() => {
+    fetchInitialData();
+  }, []);
 
   const handlePlayerChange = (e) => {
     const selectedPlayerId = e.target.value;

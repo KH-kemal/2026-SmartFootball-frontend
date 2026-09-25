@@ -9,11 +9,8 @@ export default function PlayerList() {
   const [search, setSearch] = useState('');
   const [position, setPosition] = useState('');
 
-  useEffect(() => {
-    fetchPlayers();
-  }, [position]);
 
-  const fetchPlayers = async (searchQuery = search) => {
+  async function fetchPlayers(searchQuery = search) {
     try {
       setLoading(true);
       const params = {};
@@ -27,7 +24,11 @@ export default function PlayerList() {
     } finally {
       setLoading(false);
     }
-  };
+  }
+
+  useEffect(() => {
+    fetchPlayers();
+  }, [position]);
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();

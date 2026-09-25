@@ -18,11 +18,8 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchDashboardStats();
-  }, []);
 
-  const fetchDashboardStats = async () => {
+  async function fetchDashboardStats() {
     try {
       setLoading(true);
       const response = await api.get('/dashboard-stats');
@@ -33,7 +30,11 @@ export default function AdminDashboard() {
     } finally {
       setLoading(false);
     }
-  };
+  }
+
+  useEffect(() => {
+    fetchDashboardStats();
+  }, []);
 
   const formatDate = (dateString) => {
     if (!dateString) return '-';

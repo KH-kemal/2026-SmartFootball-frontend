@@ -70,7 +70,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative bg-gradient-to-br from-[#0c0624] via-[#120736] to-[#070318] text-slate-300 border-t border-primary/20 transition-all duration-300 overflow-hidden">
+    <footer className="relative mt-auto shrink-0 bg-gradient-to-br from-[#0c0624] via-[#120736] to-[#070318] text-slate-300 border-t border-primary/20 transition-all duration-300 overflow-hidden">
       {/* Decorative top gradient glowing line */}
       <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-transparent via-primary to-transparent opacity-80"></div>
 
@@ -78,8 +78,8 @@ export default function Footer() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(139,92,246,0.06),transparent_60%)] pointer-events-none"></div>
 
       {/* Main Content Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
           
           {/* Column 1: Brand Info & Socials */}
           <div className="space-y-6">
@@ -181,7 +181,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-white/5 bg-black/30 py-6 relative z-10 transition-colors duration-300">
+      <div className="border-t border-white/5 bg-black/30 py-4 relative z-10 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
           <div className="flex items-center space-x-1.5 text-slate-400 font-semibold">
             <span>&copy; {new Date().getFullYear()} SmartFootball. Dibuat dengan</span>

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { 
-  LayoutDashboard, Shield, User, Calendar, BarChart3, 
-  LogOut, Globe, Sun, Moon, Menu, X, ChevronLeft, ChevronRight 
+import {
+  LayoutDashboard, Shield, User, Calendar, BarChart3,
+  LogOut, Globe, Sun, Moon, Menu, X, ChevronLeft, ChevronRight, QrCode
 } from 'lucide-react';
 import api from '../services/api';
 
@@ -28,6 +28,7 @@ export default function AdminSidebar({ theme, toggleTheme }) {
     { name: 'Dashboard', path: '/admin/dashboard', icon: LayoutDashboard },
     { name: 'Kelola Tim', path: '/admin/teams', icon: Shield },
     { name: 'Kelola Pemain', path: '/admin/players', icon: User },
+    { name: 'Screening Pemain', path: '/admin/screening', icon: QrCode },
     { name: 'Kelola Jadwal', path: '/admin/fixtures', icon: Calendar },
     { name: 'Kelola Statistik', path: '/admin/player-stats', icon: BarChart3 },
   ];
@@ -42,7 +43,7 @@ export default function AdminSidebar({ theme, toggleTheme }) {
   const SidebarContent = () => (
     <div className="relative h-full flex flex-col justify-between bg-white dark:bg-slate-900 border-r border-slate-200/80 dark:border-slate-800/80 transition-colors duration-300">
       {/* Collapse Toggle Button (Desktop Only) */}
-      <button 
+      <button
         onClick={() => setIsCollapsed(!isCollapsed)}
         className="hidden md:flex absolute -right-3 top-[30px] w-6 h-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-full items-center justify-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 shadow-xs hover:shadow-sm hover:scale-110 active:scale-95 transition-all z-50 cursor-pointer"
         title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
@@ -55,10 +56,10 @@ export default function AdminSidebar({ theme, toggleTheme }) {
         {/* Brand */}
         <div className={`p-6 flex items-center justify-between border-b border-slate-100 dark:border-slate-800/80 ${isCollapsed ? 'justify-center' : ''}`}>
           <Link to="/admin/dashboard" className="flex items-center space-x-3 group">
-            <img 
-              src="/logo.png" 
-              alt="SmartFootball Logo" 
-              className="w-9 h-9 object-contain shrink-0 transition-transform duration-300 group-hover:scale-105" 
+            <img
+              src="/logo.png"
+              alt="SmartFootball Logo"
+              className="w-9 h-9 object-contain shrink-0 transition-transform duration-300 group-hover:scale-105"
             />
             {!isCollapsed && (
               <span className="font-extrabold text-base tracking-tight text-slate-800 dark:text-white">
@@ -150,7 +151,7 @@ export default function AdminSidebar({ theme, toggleTheme }) {
             Smart<span className="text-primary">Admin</span>
           </span>
         </Link>
-        <button 
+        <button
           onClick={() => setMobileOpen(!mobileOpen)}
           className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400"
         >
@@ -162,8 +163,8 @@ export default function AdminSidebar({ theme, toggleTheme }) {
       {mobileOpen && (
         <div className="md:hidden fixed inset-0 z-50 flex">
           {/* Backdrop */}
-          <div 
-            className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs" 
+          <div
+            className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs"
             onClick={() => setMobileOpen(false)}
           />
           {/* Sidebar Drawer */}
