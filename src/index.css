@@ -25,3 +25,11 @@ body { margin: 0; }
 .auth-error { color: #be123c; font-size: .85rem; }
 .auth-switch { margin-top: 1.5rem; text-align: center; color: #64748b; font-size: .85rem; }
 .auth-switch a { color: #2563eb; font-weight: 800; }
+/* Use a locally available UI font with crisp letterforms and consistent weights. */
+:root { --font-sans: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; font-family: var(--font-sans); }
+.public-shell, .admin-shell { font-family: var(--font-sans); font-weight: 400; line-height: 1.6; -webkit-font-smoothing: auto; -moz-osx-font-smoothing: auto; }
+.public-main .text-xs, .admin-content .text-xs { font-size: .875rem; line-height: 1.55; }
+.public-main .text-sm, .admin-content .text-sm { font-size: .9375rem; line-height: 1.65; }
+.public-main .text-\[10px\], .admin-content .text-\[10px\] { font-size: .75rem; line-height: 1.5; }
+.public-main :is(input, select, textarea), .admin-content :is(input, select, textarea) { font-family: inherit; font-weight: 400; font-size: .9375rem; }
+.public-main :is(th, td), .admin-content :is(th, td) { font-variant-numeric: tabular-nums; }

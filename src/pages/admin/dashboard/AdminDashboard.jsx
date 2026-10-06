@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Trophy, Users, Calendar, Award, Sparkles, Plus, ArrowRight } from 'lucide-react';
+import { Trophy, Users, Calendar, Award, Plus, ArrowRight } from 'lucide-react';
 import api from '../../../services/api';
 
 export default function AdminDashboard() {
@@ -54,12 +54,7 @@ export default function AdminDashboard() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 transition-colors duration-300">
-      <div className="mb-8 pb-6 border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
-        <h1 className="text-3xl font-black tracking-tight text-slate-800 dark:text-white flex items-center gap-3">
-          <Sparkles className="text-primary" /> Dashboard Overview
-        </h1>
-        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1.5">Ringkasan aktivitas data dan statistik kompetisi SmartFootball</p>
-      </div>
+      <section className="admin-hero"><div><span className="admin-hero-eyebrow">YOUR COMPETITION, AT A GLANCE</span><h1>Halo, {JSON.parse(localStorage.getItem('user') || '{}').name || 'Admin'}</h1><p>Siap untuk pertandingan berikutnya? Pantau kompetisi dan siapkan setiap detail dari sini.</p></div><Link to="/admin/fixtures/create"><Plus size={17} /> Buat pertandingan</Link></section>
 
       {error && (
         <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-4 text-red-500 dark:text-red-400 text-sm mb-8 font-semibold">

@@ -70,7 +70,7 @@ export default function PlayerDetail() {
       </div>
 
       {/* Profile Card */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 rounded-3xl p-8 shadow-xs mb-8 transition-colors duration-300">
+      <div className="public-detail-header bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 rounded-3xl p-8 shadow-xs mb-8 transition-colors duration-300">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border-b border-slate-100 dark:border-slate-800/80 pb-8">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
             {player.photo ? (

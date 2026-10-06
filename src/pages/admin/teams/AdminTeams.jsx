@@ -1,3 +1,4 @@
+import AdminListTools from '../../../components/AdminListTools';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Trophy, Plus, Edit3, Trash2 } from 'lucide-react';
@@ -5,6 +6,8 @@ import api from '../../../services/api';
 
 export default function AdminTeams() {
   const [teams, setTeams] = useState([]);
+  const [search, setSearch] = useState('');
+  const filtered = teams.filter(team => (team.name || '').toLowerCase().includes(search.trim().toLowerCase()));
   const [loading, setLoading] = useState(true);
 
 
@@ -52,6 +55,7 @@ export default function AdminTeams() {
         </Link>
       </div>
 
+      <AdminListTools value={search} onChange={setSearch} count={filtered.length} total={teams.length} placeholder="Cari nama klub..." />
       {loading ? (
         <div className="text-center py-20">
           <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
@@ -70,7 +74,8 @@ export default function AdminTeams() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60 font-semibold">
-                {teams.map((team) => (
+                {filtered.length === 0 && <tr><td colSpan={12}><div className="admin-empty">Tidak ada data yang sesuai. Tambahkan data baru atau ubah pencarian.</div></td></tr>}
+                {filtered.map((team) => (
                   <tr key={team.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
                     <td className="py-4 px-6 font-bold text-slate-800 dark:text-white flex items-center space-x-3">
                       {team.logo ? (

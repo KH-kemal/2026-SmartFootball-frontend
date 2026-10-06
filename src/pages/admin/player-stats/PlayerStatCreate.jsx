@@ -94,8 +94,8 @@ export default function PlayerStatCreate() {
         </Link>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl">
-        <h1 className="text-2xl font-black text-white mb-2">Input Statistik Performa Pemain</h1>
+      <div className="bg-white dark:bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl">
+        <h1 className="text-2xl font-black text-slate-800 dark:text-white mb-2">Input Statistik Performa Pemain</h1>
         <p className="text-sm text-slate-400 mb-6">Sistem akan otomatis menghitung rating laga (0-10) dan memperbarui Overall Rating pemain di database.</p>
 
         {error && (
@@ -113,7 +113,7 @@ export default function PlayerStatCreate() {
                 value={form.fixture_id}
                 onChange={handleChange}
                 required
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-red-500 transition-all"
+                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-800 dark:text-white focus:outline-none focus:border-primary transition-all"
               >
                 {fixtures.map((f) => (
                   <option key={f.id} value={f.id}>
@@ -129,7 +129,7 @@ export default function PlayerStatCreate() {
                 value={form.player_id}
                 onChange={handlePlayerChange}
                 required
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-red-500 transition-all"
+                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-800 dark:text-white focus:outline-none focus:border-primary transition-all"
               >
                 {players.map((p) => (
                   <option key={p.id} value={p.id}>
@@ -145,19 +145,19 @@ export default function PlayerStatCreate() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               <div>
                 <label className="block text-xs font-bold text-slate-400 mb-1">Gol (+1.0)</label>
-                <input type="number" min="0" name="goals" value={form.goals} onChange={handleChange} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-white font-bold" />
+                <input type="number" min="0" name="goals" value={form.goals} onChange={handleChange} className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-slate-800 dark:text-white font-bold" />
               </div>
               <div>
                 <label className="block text-xs font-bold text-slate-400 mb-1">Assist (+0.5)</label>
-                <input type="number" min="0" name="assists" value={form.assists} onChange={handleChange} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-white font-bold" />
+                <input type="number" min="0" name="assists" value={form.assists} onChange={handleChange} className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-slate-800 dark:text-white font-bold" />
               </div>
               <div>
                 <label className="block text-xs font-bold text-slate-400 mb-1">Menit Bermain</label>
-                <input type="number" min="0" max="120" name="minutes_played" value={form.minutes_played} onChange={handleChange} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-white font-bold" />
+                <input type="number" min="0" max="120" name="minutes_played" value={form.minutes_played} onChange={handleChange} className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-slate-800 dark:text-white font-bold" />
               </div>
               <div>
                 <label className="block text-xs font-bold text-slate-400 mb-1">Pass Akurasi (%)</label>
-                <input type="number" min="0" max="100" name="passes_accuracy" value={form.passes_accuracy} onChange={handleChange} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-white font-bold" />
+                <input type="number" min="0" max="100" name="passes_accuracy" value={form.passes_accuracy} onChange={handleChange} className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-slate-800 dark:text-white font-bold" />
               </div>
             </div>
           </div>
@@ -167,19 +167,19 @@ export default function PlayerStatCreate() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 items-end">
               <div>
                 <label className="block text-xs font-bold text-slate-400 mb-1">Saves Kiper (+0.1)</label>
-                <input type="number" min="0" name="saves" value={form.saves} onChange={handleChange} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-white font-bold" />
+                <input type="number" min="0" name="saves" value={form.saves} onChange={handleChange} className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-slate-800 dark:text-white font-bold" />
               </div>
               <div>
                 <label className="block text-xs font-bold text-slate-400 mb-1">Tackles</label>
-                <input type="number" min="0" name="tackles" value={form.tackles} onChange={handleChange} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-white font-bold" />
+                <input type="number" min="0" name="tackles" value={form.tackles} onChange={handleChange} className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-slate-800 dark:text-white font-bold" />
               </div>
               <div>
                 <label className="block text-xs font-bold text-slate-400 mb-1">Interceptions</label>
-                <input type="number" min="0" name="interceptions" value={form.interceptions} onChange={handleChange} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-white font-bold" />
+                <input type="number" min="0" name="interceptions" value={form.interceptions} onChange={handleChange} className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-slate-800 dark:text-white font-bold" />
               </div>
-              <div className="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center space-x-3">
+              <div className="bg-slate-50 dark:bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center space-x-3">
                 <input type="checkbox" id="clean_sheet" name="clean_sheet" checked={form.clean_sheet} onChange={handleChange} className="w-5 h-5 accent-blue-600 rounded cursor-pointer" />
-                <label htmlFor="clean_sheet" className="text-xs font-bold text-white cursor-pointer select-none">Clean Sheet (+0.5)</label>
+                <label htmlFor="clean_sheet" className="text-xs font-bold text-slate-800 dark:text-white cursor-pointer select-none">Clean Sheet (+0.5)</label>
               </div>
             </div>
           </div>
@@ -189,15 +189,15 @@ export default function PlayerStatCreate() {
             <div className="grid grid-cols-3 gap-4">
               <div>
                 <label className="block text-xs font-bold text-slate-400 mb-1">Kartu Kuning (-0.3)</label>
-                <input type="number" min="0" name="yellow_cards" value={form.yellow_cards} onChange={handleChange} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-red-400 font-bold" />
+                <input type="number" min="0" name="yellow_cards" value={form.yellow_cards} onChange={handleChange} className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-red-400 font-bold" />
               </div>
               <div>
                 <label className="block text-xs font-bold text-slate-400 mb-1">Kartu Merah (-1.0)</label>
-                <input type="number" min="0" name="red_cards" value={form.red_cards} onChange={handleChange} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-red-400 font-bold" />
+                <input type="number" min="0" name="red_cards" value={form.red_cards} onChange={handleChange} className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-red-400 font-bold" />
               </div>
               <div>
                 <label className="block text-xs font-bold text-slate-400 mb-1">Gol Bunuh Diri (-1.0)</label>
-                <input type="number" min="0" name="own_goals" value={form.own_goals} onChange={handleChange} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-red-400 font-bold" />
+                <input type="number" min="0" name="own_goals" value={form.own_goals} onChange={handleChange} className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-red-400 font-bold" />
               </div>
             </div>
           </div>
@@ -212,7 +212,7 @@ export default function PlayerStatCreate() {
             <button
               type="submit"
               disabled={loading}
-              className="px-6 py-3 rounded-xl bg-red-600 hover:bg-red-500 text-white text-sm font-semibold transition-all shadow-lg shadow-red-600/20 disabled:opacity-50"
+              className="px-6 py-3 rounded-xl bg-primary hover:bg-primary-hover text-slate-800 dark:text-white text-sm font-semibold transition-all shadow-lg shadow-primary/10 disabled:opacity-50"
             >
               {loading ? 'Mengkalkulasi Rating...' : 'Simpan Statistik'}
             </button>

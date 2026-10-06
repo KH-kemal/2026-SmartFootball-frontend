@@ -1,3 +1,4 @@
+import AdminListTools from '../../../components/AdminListTools';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Users, Plus, Edit3, Trash2, QrCode, X, Printer, Shield } from 'lucide-react';
@@ -5,6 +6,8 @@ import api from '../../../services/api';
 
 export default function AdminPlayers() {
   const [players, setPlayers] = useState([]);
+  const [search, setSearch] = useState('');
+  const filtered = players.filter(player => ([player.name, player.team?.name, player.position].join(' ') || '').toLowerCase().includes(search.trim().toLowerCase()));
   const [loading, setLoading] = useState(true);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [showCardModal, setShowCardModal] = useState(false);
@@ -147,6 +150,7 @@ export default function AdminPlayers() {
         </Link>
       </div>
 
+      <AdminListTools value={search} onChange={setSearch} count={filtered.length} total={players.length} placeholder="Cari pemain, klub, posisi..." />
       {loading ? (
         <div className="text-center py-20">
           <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
@@ -168,7 +172,8 @@ export default function AdminPlayers() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60 font-semibold">
-                {players.map((player) => (
+                {filtered.length === 0 && <tr><td colSpan={12}><div className="admin-empty">Tidak ada data yang sesuai. Tambahkan data baru atau ubah pencarian.</div></td></tr>}
+                {filtered.map((player) => (
                   <tr key={player.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
                     <td className="py-4 px-6 font-bold text-slate-800 dark:text-white truncate max-w-[180px]">{player.name}</td>
                     <td className="py-4 px-6 text-slate-500 dark:text-slate-450">{player.team?.name || 'Tanpa Klub'}</td>

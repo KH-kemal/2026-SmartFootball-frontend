@@ -62,8 +62,8 @@ export default function FixtureCreate() {
         </Link>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl">
-        <h1 className="text-2xl font-black text-white mb-6">Buat Jadwal Pertandingan Baru</h1>
+      <div className="bg-white dark:bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl">
+        <h1 className="text-2xl font-black text-slate-800 dark:text-white mb-6">Buat Jadwal Pertandingan Baru</h1>
 
         {error && (
           <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-4 text-red-400 text-sm mb-6">
@@ -80,7 +80,7 @@ export default function FixtureCreate() {
                 value={form.home_team_id}
                 onChange={handleChange}
                 required
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-red-500 transition-all"
+                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-800 dark:text-white focus:outline-none focus:border-primary transition-all"
               >
                 {teams.map((t) => (
                   <option key={t.id} value={t.id}>{t.name}</option>
@@ -94,7 +94,7 @@ export default function FixtureCreate() {
                 value={form.away_team_id}
                 onChange={handleChange}
                 required
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-red-500 transition-all"
+                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-800 dark:text-white focus:outline-none focus:border-primary transition-all"
               >
                 {teams.map((t) => (
                   <option key={t.id} value={t.id}>{t.name}</option>
@@ -112,7 +112,7 @@ export default function FixtureCreate() {
                 value={form.match_date}
                 onChange={handleChange}
                 required
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-red-500 transition-all"
+                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-800 dark:text-white focus:outline-none focus:border-primary transition-all"
               />
             </div>
             <div>
@@ -123,7 +123,7 @@ export default function FixtureCreate() {
                 value={form.venue}
                 onChange={handleChange}
                 placeholder="Contoh: Stadion Gelora Bung Tomo"
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-red-500 transition-all"
+                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-800 dark:text-white placeholder-slate-600 focus:outline-none focus:border-primary transition-all"
               />
             </div>
           </div>
@@ -138,7 +138,7 @@ export default function FixtureCreate() {
             <button
               type="submit"
               disabled={loading}
-              className="px-6 py-3 rounded-xl bg-red-600 hover:bg-red-500 text-white text-sm font-semibold transition-all shadow-lg shadow-red-600/20 disabled:opacity-50"
+              className="px-6 py-3 rounded-xl bg-primary hover:bg-primary-hover text-slate-800 dark:text-white text-sm font-semibold transition-all shadow-lg shadow-primary/10 disabled:opacity-50"
             >
               {loading ? 'Menyimpan...' : 'Simpan Jadwal'}
             </button>

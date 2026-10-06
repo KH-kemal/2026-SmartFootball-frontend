@@ -1,3 +1,4 @@
+import AdminListTools from '../../../components/AdminListTools';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { BarChart3, Plus, Trash2 } from 'lucide-react';
@@ -5,6 +6,8 @@ import api from '../../../services/api';
 
 export default function AdminPlayerStats() {
   const [stats, setStats] = useState([]);
+  const [search, setSearch] = useState('');
+  const filtered = stats.filter(row => ([row.player?.name, row.team?.name, row.fixture_id].join(' ') || '').toLowerCase().includes(search.trim().toLowerCase()));
   const [loading, setLoading] = useState(true);
 
 
@@ -52,6 +55,7 @@ export default function AdminPlayerStats() {
         </Link>
       </div>
 
+      <AdminListTools value={search} onChange={setSearch} count={filtered.length} total={stats.length} placeholder="Cari pemain, klub, ID laga..." />
       {loading ? (
         <div className="text-center py-20">
           <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
@@ -77,7 +81,8 @@ export default function AdminPlayerStats() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60 font-semibold">
-                {stats.map((row) => (
+                {filtered.length === 0 && <tr><td colSpan={12}><div className="admin-empty">Tidak ada data yang sesuai. Tambahkan data baru atau ubah pencarian.</div></td></tr>}
+                {filtered.map((row) => (
                   <tr key={row.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
                     <td className="py-4 px-6 font-bold text-slate-800 dark:text-white">
                       <div>{row.player?.name || 'Pemain Terhapus'}</div>

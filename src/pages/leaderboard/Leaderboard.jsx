@@ -33,7 +33,7 @@ export default function Leaderboard() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 transition-colors duration-300">
-      <div className="mb-8 pb-6 border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
+      <div className="public-page-intro mb-8 pb-6 border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
         <h1 className="text-3xl font-black tracking-tight text-slate-800 dark:text-white flex items-center gap-3">
           <Sparkles className="text-primary" /> Leaderboard & Top Performers
         </h1>
