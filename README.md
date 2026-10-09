@@ -19,7 +19,13 @@ VITE_API_BASE_URL=http://127.0.0.1:8000/api
 
 Pengunjung dapat membuka `/`, `/teams`, `/players`, `/fixtures`, `/league-table`, dan `/leaderboard` tanpa login. Detail tim dan pemain juga publik. `/login` dan `/register` menyediakan autentikasi. `/admin/*` memerlukan akun dengan `is_admin=true`; akses diperiksa ulang melalui `/api/me`, dan backend juga melindungi endpoint admin.
 
-## Pemeriksaan
+## Deployment ke domain
+
+Lihat [DEPLOYMENT.md](DEPLOYMENT.md) untuk build otomatis ke branch `gh-pages`, pengaturan `league.karyabintangmandiri.com`, DNS, HTTPS, dan koneksi backend produksi.
+
+Backend belum di-hosting. Frontend produksi tanpa `VITE_API_BASE_URL` tidak mengirim request ke localhost; data dan login membutuhkan backend HTTPS.
+
+## Pemeriksaan build
 
 ```bash
 npm run build

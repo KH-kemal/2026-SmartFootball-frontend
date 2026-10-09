@@ -1,7 +1,8 @@
 import axios from 'axios';
 
+const configuredBaseURL = import.meta.env.VITE_API_BASE_URL?.trim();
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api',
+  baseURL: configuredBaseURL || (import.meta.env.DEV ? 'http://127.0.0.1:8000/api' : '/api'),
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
@@ -10,6 +11,9 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
+    if (import.meta.env.PROD && !configuredBaseURL) {
+      return Promise.reject(new Error('API produksi belum dikonfigurasi. Backend KBMLeague belum tersedia.'));
+    }
     const token = localStorage.getItem('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
