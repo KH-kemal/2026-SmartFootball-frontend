@@ -20,10 +20,10 @@ export default function AdminSidebar({ theme, toggleTheme }) {
     finally { localStorage.removeItem('token'); localStorage.removeItem('user'); navigate('/login'); }
   }
   return <>
-    <div className="admin-mobile-bar md:hidden"><Link to="/admin/dashboard">SmartFootball<span> / admin</span></Link><button onClick={() => setMobileOpen(!mobileOpen)} aria-label="Buka navigasi" aria-expanded={mobileOpen}><Menu size={22} /></button></div>
+    <div className="admin-mobile-bar md:hidden"><Link to="/admin/dashboard">KBMLeague<span> / admin</span></Link><button onClick={() => setMobileOpen(!mobileOpen)} aria-label="Buka navigasi" aria-expanded={mobileOpen}><Menu size={22} /></button></div>
     {mobileOpen && <button className="admin-backdrop md:hidden" onClick={() => setMobileOpen(false)} aria-label="Tutup navigasi" />}
     <aside className={`admin-sidebar ${mobileOpen ? 'is-open' : ''}`}>
-      <div className="flex items-center justify-between"><Link to="/admin/dashboard" className="admin-brand" onClick={() => setMobileOpen(false)}><span className="admin-brand-icon"><Trophy size={23} /></span><span>SmartFootball<small>COMPETITION MANAGER</small></span></Link><button className="md:hidden" onClick={() => setMobileOpen(false)} aria-label="Tutup navigasi"><X size={20} /></button></div>
+      <div className="flex items-center justify-between"><Link to="/admin/dashboard" className="admin-brand" onClick={() => setMobileOpen(false)}><span className="admin-brand-icon"><Trophy size={23} /></span><span>KBMLeague<small>COMPETITION MANAGER</small></span></Link><button className="md:hidden" onClick={() => setMobileOpen(false)} aria-label="Tutup navigasi"><X size={20} /></button></div>
       <p className="admin-nav-label">WORKSPACE</p>
       <nav aria-label="Navigasi admin" className="admin-nav">{menu.map(({ name, path, icon: Icon }) => {
         const active = pathname.split('/')[2] === path;

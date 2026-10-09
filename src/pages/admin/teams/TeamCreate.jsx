@@ -16,7 +16,7 @@ export default function TeamCreate() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    document.title = 'Tambah Tim | SmartFootball';
+    document.title = 'Tambah Tim | KBMLeague';
   }, []);
 
   const handleChange = (e) => {

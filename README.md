@@ -1,6 +1,6 @@
-# SmartFootball Frontend
+# KBMLeague Frontend
 
-React 19 + Vite untuk halaman publik dan portal admin SmartFootball. Seluruh data kompetisi diambil dari Laravel API; tidak ada akun Google simulasi atau data kompetisi bawaan.
+React 19 + Vite untuk halaman publik dan portal admin KBMLeague. Seluruh data kompetisi diambil dari Laravel API; tidak ada akun Google simulasi atau data kompetisi bawaan.
 
 ## Menjalankan
 

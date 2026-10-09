@@ -38,7 +38,7 @@ export default function FixtureList() {
           <h1 className="text-3xl font-black tracking-tight text-slate-800 dark:text-white flex items-center gap-3">
             <Calendar className="text-primary" /> Jadwal & Hasil Pertandingan
           </h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1.5">Kompetisi turnamen sepak bola SmartFootball</p>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1.5">Kompetisi turnamen sepak bola KBMLeague</p>
         </div>
         <div className="flex items-center space-x-3">
           <select

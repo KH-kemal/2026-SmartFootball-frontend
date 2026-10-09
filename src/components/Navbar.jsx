@@ -23,7 +23,7 @@ export default function Navbar({ theme, toggleTheme }) {
   }
   const closeMenus = () => { setOpen(false); setProfile(false); };
   return <header className="public-header"><div className="public-nav-wrap">
-    <Link to="/" className="public-brand" onClick={closeMenus}><span><Trophy size={22} /></span>SmartFootball<span className="brand-dot">.</span></Link>
+    <Link to="/" className="public-brand" onClick={closeMenus}><span><Trophy size={22} /></span>KBMLeague<span className="brand-dot">.</span></Link>
     <nav className="public-desktop-nav" aria-label="Navigasi utama">{links.map(([href, label]) => <NavLink key={href} to={href} end={href === '/'}>{label}</NavLink>)}</nav>
     <div className="public-nav-actions"><button className="public-icon-button" onClick={toggleTheme} aria-label={theme === 'dark' ? 'Gunakan mode terang' : 'Gunakan mode gelap'}>{theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}</button>
       {user ? <div className="public-profile" ref={dropdown}><button className="public-user" onClick={() => setProfile(!profile)} aria-expanded={profile} aria-label="Menu akun">{(user.name || 'U').slice(0, 1).toUpperCase()}</button>{profile && <div className="public-profile-menu"><strong>{user.name}</strong><small>{user.email}</small>{user.is_admin && <Link to="/admin/dashboard" onClick={closeMenus}>Panel admin <ArrowUpRight size={15} /></Link>}<button onClick={logout}><LogOut size={15} /> Keluar</button></div>}</div> : <Link to="/login" className="public-login">Masuk <ArrowUpRight size={14} /></Link>}

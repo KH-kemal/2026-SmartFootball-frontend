@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import PublicLayout from './layouts/PublicLayout';
 import AdminLayout from './layouts/AdminLayout';
 import ProtectedRoute from './components/ProtectedRoute';
+import PageTitle from './components/PageTitle';
 
 
 import Home from './pages/home/Home';
@@ -32,6 +33,7 @@ import AdminScreening from './pages/admin/screening/AdminScreening';
 export default function App() {
   return (
     <Router>
+      <PageTitle />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

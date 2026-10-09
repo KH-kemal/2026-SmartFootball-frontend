@@ -14,7 +14,7 @@ export default function AdminLayout() {
     <div className="flex-1 min-w-0 flex flex-col">
       <header className="admin-topbar"><div className="admin-breadcrumb"><span>Workspace</span><ChevronRight size={14} /><strong>{sections[pathname.split('/')[2]] || 'Dashboard'}</strong>{pathname.endsWith('/create') && <><ChevronRight size={14} /><span>Tambah data</span></>}{pathname.endsWith('/edit') && <><ChevronRight size={14} /><span>Edit data</span></>}</div><div className="flex items-center gap-4"><Link to="/" className="admin-public-link">Lihat website <ArrowUpRight size={15} /></Link><div className="admin-avatar" title={user.name}>{(user.name || 'A').slice(0, 1).toUpperCase()}</div></div></header>
       <main className="admin-content flex-1" key={pathname}><Outlet /></main>
-      <footer className="admin-footer"><span>© {new Date().getFullYear()} SmartFootball</span><span>Ruang pengelolaan kompetisi</span></footer>
+      <footer className="admin-footer"><span>© {new Date().getFullYear()} KBMLeague</span><span>Ruang pengelolaan kompetisi</span></footer>
     </div>
   </div>;
 }

@@ -38,7 +38,7 @@ export default function TeamEdit() {
 
   useEffect(() => {
     fetchTeam();
-    document.title = 'Edit Tim | SmartFootball';
+    document.title = 'Edit Tim | KBMLeague';
   }, [id]);
 
   const handleChange = (e) => {

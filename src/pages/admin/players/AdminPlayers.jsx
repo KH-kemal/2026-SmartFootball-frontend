@@ -57,7 +57,7 @@ export default function AdminPlayers() {
 
     // Gunakan Google Charts API untuk QR Code di printout agar tidak memerlukan library canvas local
     const qrCodeUrl = `https://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=${encodeURIComponent(selectedPlayer.qr_code)}`;
-    const photoUrl = selectedPlayer.photo || '/logo.png';
+    const photoUrl = selectedPlayer.photo || '/kbmleague-mark.svg';
 
     printWindow.document.write(`
       <html>
@@ -268,7 +268,7 @@ export default function AdminPlayers() {
                 <div className="flex flex-col items-center w-[30%] shrink-0">
                   <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl border border-slate-800 bg-slate-950 overflow-hidden relative mb-2 shadow-inner">
                     <img
-                      src={selectedPlayer.photo || '/logo.png'}
+                      src={selectedPlayer.photo || '/kbmleague-mark.svg'}
                       alt="Profile"
                       className="w-full h-full object-cover"
                     />

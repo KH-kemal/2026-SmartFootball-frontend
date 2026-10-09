@@ -33,7 +33,7 @@ export default function TeamList() {
           <h1 className="text-3xl font-black tracking-tight text-slate-800 dark:text-white flex items-center gap-3">
             <Trophy className="text-primary" /> Daftar Tim & Klub
           </h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1.5">Kompetisi liga sepak bola SmartFootball</p>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1.5">Kompetisi liga sepak bola KBMLeague</p>
         </div>
         <span className="self-start sm:self-center px-4 py-2 bg-primary/10 border border-primary/20 text-primary font-bold rounded-xl text-sm transition-colors">
           Total: {teams.length} Tim
